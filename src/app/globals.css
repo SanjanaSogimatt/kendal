@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.map-wrap {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 77px); /* calculate height of the screen minus the heading */
+}
+
+.map {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+/* Custom popup styles */
+.custom-popup {
+  padding: 0 !important;
+  max-width: none !important;
+}
+
+.custom-popup .maplibregl-popup-content {
+  padding: 0 !important;
+  border-radius: 0.5rem !important;
+  overflow: hidden !important;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1) !important;
+  background: transparent !important;
+}
+
+.custom-popup .maplibregl-popup-tip {
+  display: none;
+}
+
+.maplibregl-popup {
+  z-index: 1000 !important;
+}
