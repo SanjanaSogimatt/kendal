@@ -12,7 +12,7 @@ export interface Listing {
   longitude: number;
   propertyType: string;
   listPrice: number;
-  closePrice: number | null;
+  closePrice: number | undefined;
   isLease: boolean;
   acreage: number;
   bathroomsTotal: number;
@@ -54,7 +54,7 @@ export interface StoreState {
   setListings: (listings: Listing[]) => void;
   setSelectedCard: (card: Listing | null) => void;
   setSelectedMarker: (marker: Listing | null) => void;
-  setFilter: (key: string, value: any) => void;
+  setFilter: (key: string, value: string | number) => void;
   applyFilters: () => void;
 }
 

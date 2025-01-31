@@ -1,5 +1,6 @@
 import React, { memo, useState } from 'react';
 import { Listing } from '@/store/store';
+import Image from "next/image";
 
 interface MarkerPopupProps {
   listing: Listing;
@@ -41,10 +42,11 @@ const MarkerPopup = memo(function MarkerPopup({ listing, onClose }: MarkerPopupP
           <div className="absolute inset-0 bg-gray-200 animate-pulse" />
         )}
         
-        <img
+        <Image
           src={listing.photos?.[0]?.photoUrl || '/placeholder-image.jpg'}
           alt={`${listing.streetNumber} ${listing.streetName}`}
-          className="w-full h-full object-cover"
+          layout="fill"
+          objectFit="cover"
           onLoad={() => setImageLoaded(true)}
         />
 
@@ -76,4 +78,4 @@ const MarkerPopup = memo(function MarkerPopup({ listing, onClose }: MarkerPopupP
   );
 });
 
-export default MarkerPopup; 
+export default MarkerPopup;

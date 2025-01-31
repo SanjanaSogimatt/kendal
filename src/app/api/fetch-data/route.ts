@@ -1,8 +1,7 @@
 import Listing from "@/schema/schema";
 import dbConnect from "@/db/db";
-import { NextApiRequest } from "next";
 
-export async function GET(req: Request, res: Response)
+export async function GET(req: Request)
 {
 
     try {

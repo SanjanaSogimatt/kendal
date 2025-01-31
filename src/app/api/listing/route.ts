@@ -1,10 +1,9 @@
-// pages/api/listings.ts
-import { NextApiRequest, NextApiResponse } from 'next';
+
 import {NextResponse} from 'next/server';
 import dbConnect from '@/db/db';
 import Listing from '@/schema/schema';
 
-export async function GET(req: NextApiRequest, res: NextApiResponse) {
+export async function GET(req: Request) {
     await dbConnect();
 
     if (req.method === 'GET') {
@@ -15,7 +14,7 @@ export async function GET(req: NextApiRequest, res: NextApiResponse) {
                 listings:listings
             });
         } catch (error) {
-            return NextResponse.json({ error: 'Error fetching listings' });
+            return NextResponse.json({ message: 'Error fetching listings',error});
         }
     } else {
         return NextResponse.json({ error: 'Method Not Allowed' });

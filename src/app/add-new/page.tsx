@@ -32,7 +32,7 @@ const ListingForm = () => {
         propertyType: string;
         listPrice: number;
         bathroomsTotal: string;
-        bedroomTotal: string;
+        bedroomsTotal: string;
         livingArea: number;
         acreage: number;
         city: string;
@@ -151,11 +151,11 @@ const ListingForm = () => {
                                     </label>
                                     <input
                                         type="number"
-                                        {...register("bedroomTotal", { required: "Number of bedrooms is required" })}
+                                        {...register("bedroomsTotal", { required: "Number of bedrooms is required" })}
                                         className={inputBaseStyles}
                                     />
-                                    {errors.bedroomTotal && (
-                                        <p className="mt-1 text-sm text-red-600">{errors.bedroomTotal.message}</p>
+                                    {errors.bedroomsTotal && (
+                                        <p className="mt-1 text-sm text-red-600">{errors.bedroomsTotal.message}</p>
                                     )}
                                 </div>
 

@@ -69,18 +69,18 @@ const ListingFilterList = memo(function ListingFilterList() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
         <select
-          id="priceRange"
+          id="maxPrice"
           className="bg-transparent border-none focus:ring-0 text-sm font-medium text-gray-700 cursor-pointer"
-          value={filters.priceRange || 'any'}
-          onChange={(e) => setFilter('priceRange', e.target.value)}
+          value={filters.maxPrice}
+          onChange={(e) => setFilter('maxPrice', e.target.value)}
         >
-          <option value="any">Any Price</option>
-          <option value="0-500000">Under $500K</option>
-          <option value="500000-1000000">$500K - $1M</option>
-          <option value="1000000-2000000">$1M - $2M</option>
-          <option value="2000000-5000000">$2M - $5M</option>
-          <option value="5000000-10000000">$5M - $10M</option>
-          <option value="10000000+">$10M+</option>
+          <option value={Number.MAX_SAFE_INTEGER}>Any Price</option>
+          <option value={500000}>Under $500K</option>
+          <option value={1000000}>Under $1M</option>
+          <option value={2000000}>Under $2M</option>
+          <option value={5000000}>Under $5M</option>
+          <option value={10000000}>Under $10M</option>
+          <option value={Number.MAX_SAFE_INTEGER}>$10M+</option>
         </select>
       </div>
     </div>

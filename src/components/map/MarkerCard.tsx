@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Listing } from '@/store/store';
+import Image from "next/image";
 
 interface MarkerCardProps {
   listing: Listing;
@@ -16,7 +17,7 @@ const MarkerCard = ({ listing, onClose }: MarkerCardProps) => {
       setImageLoading(true);
       setShowSkeleton(true);
       
-      const img = new Image();
+      const img = new window.Image();
       img.src = listing.photos[0].photoUrl;
       
       img.onload = () => {
@@ -62,7 +63,7 @@ const MarkerCard = ({ listing, onClose }: MarkerCardProps) => {
             />
             
             <div className="aspect-[4/3] relative">
-              <img
+              <Image
                 src={imageSrc || '/placeholder-image.jpg'}
                 alt={`${listing.streetNumber} ${listing.streetName}`}
                 className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${
@@ -120,4 +121,4 @@ const MarkerCard = ({ listing, onClose }: MarkerCardProps) => {
   );
 };
 
-export default MarkerCard; 
+export default MarkerCard;

@@ -16,16 +16,18 @@ export function useInView<T extends HTMLElement>() {
       }
     );
 
-    if (ref.current) {
-      observer.observe(ref.current);
+    const element = ref.current; // Store current ref value
+
+    if (element) {
+      observer.observe(element);
     }
 
     return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
+      if (element) {
+        observer.unobserve(element); // Use stored ref value
       }
     };
   }, []);
 
   return { ref, isInView };
-} 
+}

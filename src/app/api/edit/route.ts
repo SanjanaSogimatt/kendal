@@ -1,6 +1,6 @@
 import dbConnect from "@/db/db";
 import Listing from "@/schema/schema";
-export async function POST(req: Request, res: Response) {
+export async function POST(req: Request) {
     try {
         await dbConnect();
        
@@ -23,11 +23,15 @@ export async function POST(req: Request, res: Response) {
                 message: "Listing not found"
             });
         } else {
-            return Response.json({
-                success: true,
-                message: "Listing found",
-                data: updatedListing
-            });
+            const allListings = await Listing.find();
+            return new Response(
+                JSON.stringify({
+                    success: true,
+                    message: "Listing updated successfully",
+                    listings: allListings,
+                }),
+                { status: 200, headers: { "Content-Type": "application/json" } }
+            );
         }
         
     } catch (error) {

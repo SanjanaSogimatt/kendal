@@ -1,7 +1,6 @@
 import dbConnect from '@/db/db';
 import Listing from '@/schema/schema';
 import { v4 as uuidv4 } from 'uuid';
-import { NextApiRequest, NextApiResponse } from 'next';
 
 const photos = [
     'https://mediaservice.themls.com/large/25-488121/25-488121_961eed84-5ae9-41ab-921b-85632fb66d5a.jpg',
@@ -11,7 +10,7 @@ const photos = [
     'https://mediaservice.themls.com/large/25-488121/25-488121_aa9147d1-2729-4aec-97e0-1d98c95b9a53.jpg'
 ];
 
-export async function POST(req: Request, res: NextApiResponse) {
+export async function POST(req: Request) {
     await dbConnect();
     const data = await req.json();
 

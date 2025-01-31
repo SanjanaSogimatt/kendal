@@ -1,8 +1,7 @@
 import axios from 'axios';
-import { NextApiRequest, NextApiResponse } from 'next';
 import { NextResponse } from 'next/server';
 
-export async function POST(req: Request, res: NextApiResponse) {
+export async function POST(req: Request) {
     
     const { state, city, streetName, streetNumber, postalCode } = await req.json();
     // Construct the full address

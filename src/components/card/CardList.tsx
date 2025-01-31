@@ -76,7 +76,8 @@ const CardList = () => {
           ) : (
             <div className="text-center text-4xl">
               Oops! No results found. Explore others
-            </div>
+              </div>
+              
           )}
         </div>
       </div>

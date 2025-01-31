@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useEffect, useMemo } from "react";
+import React, { useRef, useEffect, useCallback } from "react";
 import * as maptilersdk from "@maptiler/sdk";
 import { GeocodingControl } from "@maptiler/geocoding-control/maptilersdk";
 import "@maptiler/geocoding-control/style.css";
@@ -59,7 +59,7 @@ export default function Map() {
     }
   };
 
-  const setHighlightedMarker = (markerId: string | null) => {
+  const setHighlightedMarker = useCallback((markerId: string | null) => {
     if (highlightedMarkerRef.current) {
       updateMarkerAppearance(highlightedMarkerRef.current, false);
     }
@@ -69,7 +69,7 @@ export default function Map() {
     } else {
       highlightedMarkerRef.current = null;
     }
-  };
+  }, []);
 
   useEffect(() => {
     if (map.current || !mapContainer.current) return;
@@ -124,7 +124,7 @@ export default function Map() {
       }
     `;
     document.head.appendChild(style);
-  }, []);
+  }, [center.lat, center.lng]);
 
   useEffect(() => {
     if (!map.current) return;
@@ -197,7 +197,7 @@ export default function Map() {
         essential: true
       });
     }
-  }, [visibleListings, selectedCard, setSelectedMarker]);
+  }, [visibleListings, selectedCard, setSelectedMarker, selectedMarker?.displayId, setHighlightedMarker]);
 
   useEffect(() => {
     if (selectedMarker) {
@@ -205,7 +205,7 @@ export default function Map() {
     } else {
       setHighlightedMarker(selectedCard?.displayId || null);
     }
-  }, [selectedMarker, selectedCard]);
+  }, [selectedMarker, selectedCard, setHighlightedMarker]);
 
   useEffect(() => {
     return () => {
@@ -213,7 +213,7 @@ export default function Map() {
         updateMarkerAppearance(highlightedMarkerRef.current, false);
       }
     };
-  }, []);
+  }, [setHighlightedMarker]);
 
   return (
     <div className="relative h-full">

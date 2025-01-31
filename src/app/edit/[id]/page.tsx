@@ -4,13 +4,13 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useRouter, useParams } from "next/navigation";
 import { useState, useEffect } from "react";
-import { useStore } from "@/store/store";
+import {useStore } from "@/store/store";
 
 interface FormData {
   propertyType: string;
   listPrice: number;
-  bathroomsTotal: string;
-  bedroomTotal: string;
+  bathroomsTotal: number;
+  bedroomsTotal: number;
   livingArea: number;
   acreage: number;
   city: string;
@@ -21,7 +21,7 @@ interface FormData {
   streetNumber: string;
   closePrice?: number;
   isLease?: boolean;
-  tags?: string;
+  tags?: string[];
 }
 
 // Update the input and select base styles
@@ -46,17 +46,22 @@ const ListingForm = () => {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitting },
+    formState: { isSubmitting },
   } = useForm<FormData>();
   const router = useRouter();
   const { id } = useParams();
-  const [alertMessage, setAlertMessage] = useState<string | null>(null);
-  const [alertType, setAlertType] = useState<"success" | "error" | null>(null);
   const listings = useStore((state) => state.listings);
+  const setListings=useStore((state)=>state.setListings);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     if (id) {
       const listing = listings.find((item) => item.displayId === id);
+      if (listing) {
+        reset(listing); // Populate the form with the data
+      } else {
+        setError('Listing not found.');
+      }
     }
   }, [id, listings, reset]);
 
@@ -64,23 +69,21 @@ const ListingForm = () => {
     try {
       const updatedDate = { ...data, displayId: id };
       const response = await axios.post(`/api/edit`, updatedDate);
-
+      setListings(response.data.listings);
       if (response.data.success) {
-        setAlertType("success");
-        setAlertMessage("Listing successfully edited!");
+       
         setTimeout(() => {
-          setAlertMessage(null);
           router.push("/");
         }, 3000);
       } else {
-        setAlertType("error");
-        setAlertMessage("Failed to edit the listing.");
+        setError('Failed to update the listing.');
       }
     } catch (error) {
-      setAlertType("error");
-      setAlertMessage("An error occurred. Please try again.");
+      console.error('Error updating listing:', error);
+      setError('An error occurred while updating the listing.');
     }
   };
+  
 
   return (
     <div className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6">
@@ -100,6 +103,8 @@ const ListingForm = () => {
               </button>
             </div>
           </div>
+
+          {error && <div className="text-red-500 text-center py-4">{error}</div>}
 
           <form onSubmit={handleSubmit(onSubmit)} className="p-8">
             {/* Main Details Section */}
@@ -146,7 +151,7 @@ const ListingForm = () => {
                     <label className="block text-sm font-medium text-gray-700 mb-2">Bedrooms</label>
                     <input
                       type="number"
-                      {...register("bedroomTotal", { required: "Bedrooms are required" })}
+                      {...register("bedroomsTotal", { required: "Bedrooms are required" })}
                       className={inputBaseStyles}
                     />
                   </div>
