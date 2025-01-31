@@ -81,6 +81,7 @@ const ListingForm = () => {
         toast.error("Something went wrong. Please try again.", { autoClose: 3000 });
       }
     } catch (error) {
+      console.error(error)
       toast.error("Something went wrong. Please try again.", { autoClose: 3000 });
     }
   };
