@@ -3,7 +3,6 @@ import axios from "axios";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from 'react';
 import Link from "next/link";
-import Image from "next/image";
 
 type Listing = {
     id: string;
@@ -74,7 +73,7 @@ const Page = () => {
                             <div>
                                 <div>
                                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                                    <Image src={listing.photos[0] && listing.photos[0].photoUrl} alt="" width={500} height={300} />
+                                    <img src={listing.photos[0] && listing.photos[0].photoUrl} alt="" width={500} height={300} />
                                 </div>
                                 <p><strong className="font-semibold">Property Type:</strong> {listing.propertyType}</p>
                                 <p><strong className="font-semibold">Price:</strong> ${listing.listPrice}</p>
