@@ -3,8 +3,10 @@ import axios from "axios";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useRouter, useParams } from "next/navigation";
-import { useState, useEffect } from "react";
-import {useStore } from "@/store/store";
+import { useEffect } from "react";
+import { useStore } from "@/store/store";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface FormData {
   propertyType: string;
@@ -52,7 +54,7 @@ const ListingForm = () => {
   const { id } = useParams();
   const listings = useStore((state) => state.listings);
   const setListings=useStore((state)=>state.setListings);
-  const [error, setError] = useState('');
+
 
   useEffect(() => {
     if (id) {
@@ -60,7 +62,7 @@ const ListingForm = () => {
       if (listing) {
         reset(listing); // Populate the form with the data
       } else {
-        setError('Listing not found.');
+        toast.error("Something went wrong. Please try again.", { autoClose: 3000 });
       }
     }
   }, [id, listings, reset]);
@@ -76,11 +78,10 @@ const ListingForm = () => {
           router.push("/");
         }, 3000);
       } else {
-        setError('Failed to update the listing.');
+        toast.error("Something went wrong. Please try again.", { autoClose: 3000 });
       }
     } catch (error) {
-      console.error('Error updating listing:', error);
-      setError('An error occurred while updating the listing.');
+      toast.error("Something went wrong. Please try again.", { autoClose: 3000 });
     }
   };
   
@@ -104,7 +105,6 @@ const ListingForm = () => {
             </div>
           </div>
 
-          {error && <div className="text-red-500 text-center py-4">{error}</div>}
 
           <form onSubmit={handleSubmit(onSubmit)} className="p-8">
             {/* Main Details Section */}

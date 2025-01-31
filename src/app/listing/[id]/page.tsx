@@ -3,6 +3,8 @@ import axios from "axios";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from 'react';
 import Link from "next/link";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 type Listing = {
     id: string;
@@ -23,7 +25,6 @@ const Page = () => {
     const { id } = useParams(); // Get the 'id' from the URL
     const [listing, setListing] = useState<Listing | null>(null);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState('');
 
     useEffect(() => {
         const fetchListingData = async () => {
@@ -31,15 +32,15 @@ const Page = () => {
                 setLoading(true);
                 const response = await axios.get(`/api/fetch-data/?id=${id}`);
                 console.log('Response:', response.data);
-                if (response) {
+
+                if (response.data.listing) {
                     setListing(response.data.listing);
                 } else {
-                    setError('Listing not found.');
+                    toast.error('Listing not found.');
                 }
             } catch (err) {
-                console.log(err);
                 console.error('Error fetching listing:', err);
-                setError('An error occurred while fetching the listing.');
+                toast.error('An error occurred while fetching the listing.');
             } finally {
                 setLoading(false);
             }
@@ -54,15 +55,12 @@ const Page = () => {
         return <div className="flex justify-center items-center h-screen">Loading...</div>;
     }
 
-    if (error) {
-        return <div className="text-center text-red-500">{error}</div>;
-    }
-
     return (
         <div className="container mx-auto p-4">
+            <ToastContainer />
             <h1 className="text-3xl font-bold mb-6 text-center">Listing Details</h1>
 
-            {listing && (
+            {listing ? (
                 <div className="card w-full max-w-4xl bg-base-100 shadow-lg p-6 mx-auto">
                     <div className="card-body">
                         <h2 className="card-title text-xl font-semibold mb-4">Property Details</h2>
@@ -73,7 +71,7 @@ const Page = () => {
                             <div>
                                 <div>
                                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                                    <img src={listing.photos[0] && listing.photos[0].photoUrl} alt="" width={500} height={300} />
+                                    <img src={listing.photos[0]?.photoUrl} alt="Property Image" width={500} height={300} />
                                 </div>
                                 <p><strong className="font-semibold">Property Type:</strong> {listing.propertyType}</p>
                                 <p><strong className="font-semibold">Price:</strong> ${listing.listPrice}</p>
@@ -92,6 +90,8 @@ const Page = () => {
                         </div>
                     </div>
                 </div>
+            ) : (
+                <div className="text-center text-gray-500">No listing available.</div>
             )}
         </div>
     );

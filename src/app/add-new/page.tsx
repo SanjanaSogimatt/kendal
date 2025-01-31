@@ -3,6 +3,8 @@ import axios from "axios";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation"
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const inputBaseStyles = `
   w-full
@@ -59,7 +61,7 @@ const ListingForm = () => {
 
     const onSubmit = async (data: FormData) => {
         try {
-            console.log('Getting longitude and latitude');
+            
             const coordResponse = await axios.post<CoordResponseData>('/api/get-coord', data);
             
             if (coordResponse.data.error) {
@@ -67,7 +69,7 @@ const ListingForm = () => {
             }
 
             const { longitude, latitude } = coordResponse.data;
-            console.log('Posting listing');
+            toast.success("Coordinates fetched successfully!", { autoClose: 1500 });
             const listingData = { ...data, longitude, latitude };
             
             const listingResponse = await axios.post<ListingResponseData>('/api/handle-listing', listingData);
@@ -76,11 +78,11 @@ const ListingForm = () => {
             if (listingResponse.data.error) {
                 throw new Error(listingResponse.data.error);
             }
-            
+            toast.success("Listing created successfully!", { autoClose: 2000 });
             router.push(`/listing/${listingResponse.data.displayId}`);
         } catch (error) {
             console.error('Error in onSubmit:', error);
-            throw error;
+            toast.error("Something went wrong. Please try again.", { autoClose: 3000 });
         }
     };
 
