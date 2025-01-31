@@ -169,6 +169,9 @@ const ListingForm = () => {
                                         {...register("bathroomsTotal", { required: "Number of bathrooms is required" })}
                                         className={inputBaseStyles}
                                     />
+                                    {errors.bathroomsTotal && (
+                                        <p className="mt-1 text-sm text-red-600">{errors.bathroomsTotal.message}</p>
+                                    )}
                                 </div>
 
                                 {/* Living Area */}
@@ -181,6 +184,9 @@ const ListingForm = () => {
                                         {...register("livingArea", { required: "Living area is required" })}
                                         className={inputBaseStyles}
                                     />
+                                    {errors.livingArea && (
+                                        <p className="mt-1 text-sm text-red-600">{errors.livingArea.message}</p>
+                                    )}
                                 </div>
 
                                 {/* Acreage */}
@@ -194,6 +200,9 @@ const ListingForm = () => {
                                         {...register("acreage", { required: "Acreage is required" })}
                                         className={inputBaseStyles}
                                     />
+                                    {errors.acreage && (
+                                        <p className="mt-1 text-sm text-red-600">{errors.acreage.message}</p>
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -211,6 +220,9 @@ const ListingForm = () => {
                                         {...register("streetNumber", { required: "Street number is required" })}
                                         className={inputBaseStyles}
                                     />
+                                    {errors.streetNumber && (
+                                        <p className="mt-1 text-sm text-red-600">{errors.streetNumber.message}</p>
+                                    )}
                                 </div>
 
                                 {/* Street Name */}
@@ -222,6 +234,9 @@ const ListingForm = () => {
                                         {...register("streetName", { required: "Street name is required" })}
                                         className={inputBaseStyles}
                                     />
+                                    {errors.streetName && (
+                                        <p className="mt-1 text-sm text-red-600">{errors.streetName.message}</p>
+                                    )}
                                 </div>
 
                                 {/* City */}
@@ -233,6 +248,9 @@ const ListingForm = () => {
                                         {...register("city", { required: "City is required" })}
                                         className={inputBaseStyles}
                                     />
+                                    {errors.city && (
+                                        <p className="mt-1 text-sm text-red-600">{errors.city.message}</p>
+                                    )}
                                 </div>
 
                                 {/* State */}
@@ -244,6 +262,9 @@ const ListingForm = () => {
                                         {...register("state", { required: "State is required" })}
                                         className={inputBaseStyles}
                                     />
+                                    {errors.state && (
+                                        <p className="mt-1 text-sm text-red-600">{errors.state.message}</p>
+                                    )}
                                 </div>
 
                                 {/* Postal Code */}
@@ -255,6 +276,9 @@ const ListingForm = () => {
                                         {...register("postalCode", { required: "Postal code is required" })}
                                         className={inputBaseStyles}
                                     />
+                                    {errors.postalCode && (
+                                        <p className="mt-1 text-sm text-red-600">{errors.postalCode.message}</p>
+                                    )}
                                 </div>
 
                                 {/* Country */}
@@ -266,6 +290,9 @@ const ListingForm = () => {
                                         {...register("country", { required: "Country is required" })}
                                         className={inputBaseStyles}
                                     />
+                                    {errors.country && (
+                                        <p className="mt-1 text-sm text-red-600">{errors.country.message}</p>
+                                    )}
                                 </div>
                             </div>
                         </div>

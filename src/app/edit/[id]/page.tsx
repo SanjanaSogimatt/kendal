@@ -46,7 +46,7 @@ const ListingForm = () => {
     register,
     handleSubmit,
     reset,
-    formState: { isSubmitting },
+    formState: { isSubmitting, errors },
   } = useForm<FormData>();
   const router = useRouter();
   const { id } = useParams();
@@ -131,6 +131,7 @@ const ListingForm = () => {
                       <option value="Commercial">Commercial</option>
                       <option value="Land">Land</option>
                     </select>
+                    {errors.propertyType && <p className="text-red-500 text-sm mt-1">{errors.propertyType.message}</p>}
                   </div>
 
                   <div>
@@ -145,6 +146,7 @@ const ListingForm = () => {
                         className={`${inputBaseStyles} pl-8`}
                       />
                     </div>
+                    {errors.listPrice && <p className="text-red-500 text-sm mt-1">{errors.listPrice.message}</p>}
                   </div>
 
                   <div>
@@ -154,6 +156,7 @@ const ListingForm = () => {
                       {...register("bedroomsTotal", { required: "Bedrooms are required" })}
                       className={inputBaseStyles}
                     />
+                    {errors.bedroomsTotal && <p className="text-red-500 text-sm mt-1">{errors.bedroomsTotal.message}</p>}
                   </div>
 
                   <div>
@@ -163,6 +166,7 @@ const ListingForm = () => {
                       {...register("bathroomsTotal", { required: "Bathrooms are required" })}
                       className={inputBaseStyles}
                     />
+                    {errors.bathroomsTotal && <p className="text-red-500 text-sm mt-1">{errors.bathroomsTotal.message}</p>}
                   </div>
 
                   <div>
@@ -172,6 +176,7 @@ const ListingForm = () => {
                       {...register("livingArea", { required: "Living Area is required" })}
                       className={inputBaseStyles}
                     />
+                    {errors.livingArea && <p className="text-red-500 text-sm mt-1">{errors.livingArea.message}</p>}
                   </div>
 
                   <div>
@@ -182,6 +187,7 @@ const ListingForm = () => {
                       {...register("acreage", { required: "Acreage is required" })}
                       className={inputBaseStyles}
                     />
+                    {errors.acreage && <p className="text-red-500 text-sm mt-1">{errors.acreage.message}</p>}
                   </div>
                 </div>
               </div>
@@ -202,6 +208,7 @@ const ListingForm = () => {
                       {...register("streetNumber", { required: "Street Number is required" })}
                       className={inputBaseStyles}
                     />
+                    {errors.streetNumber && <p className="text-red-500 text-sm mt-1">{errors.streetNumber.message}</p>}
                   </div>
 
                   <div>
@@ -210,6 +217,7 @@ const ListingForm = () => {
                       {...register("streetName", { required: "Street Name is required" })}
                       className={inputBaseStyles}
                     />
+                    {errors.streetName && <p className="text-red-500 text-sm mt-1">{errors.streetName.message}</p>}
                   </div>
 
                   <div>
@@ -218,6 +226,7 @@ const ListingForm = () => {
                       {...register("city", { required: "City is required" })}
                       className={inputBaseStyles}
                     />
+                    {errors.city && <p className="text-red-500 text-sm mt-1">{errors.city.message}</p>}
                   </div>
 
                   <div>
@@ -226,6 +235,7 @@ const ListingForm = () => {
                       {...register("state", { required: "State is required" })}
                       className={inputBaseStyles}
                     />
+                    {errors.state && <p className="text-red-500 text-sm mt-1">{errors.state.message}</p>}
                   </div>
 
                   <div>
@@ -234,6 +244,7 @@ const ListingForm = () => {
                       {...register("postalCode", { required: "Postal Code is required" })}
                       className={inputBaseStyles}
                     />
+                    {errors.postalCode && <p className="text-red-500 text-sm mt-1">{errors.postalCode.message}</p>}
                   </div>
 
                   <div>
@@ -242,6 +253,7 @@ const ListingForm = () => {
                       {...register("country", { required: "Country is required" })}
                       className={inputBaseStyles}
                     />
+                    {errors.country && <p className="text-red-500 text-sm mt-1">{errors.country.message}</p>}
                   </div>
                 </div>
               </div>

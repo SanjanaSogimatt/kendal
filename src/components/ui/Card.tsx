@@ -3,7 +3,7 @@ import React, { memo, useMemo, useState, useEffect } from 'react'
 import { useRouter } from "next/navigation"
 import { useInView } from '@/hooks/useInView'
 import { motion } from 'framer-motion'
-
+import Image from "next/image"
 
 interface CardProps {
   displayId: string;
@@ -81,8 +81,7 @@ const Card = memo(function Card({
           />
           
           {/* Main image - Always present but hidden until loaded */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src={imageSrc || '/placeholder-image.jpg'}
             alt="Property image"
             width={600}
